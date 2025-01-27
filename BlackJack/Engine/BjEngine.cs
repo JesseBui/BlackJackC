@@ -11,10 +11,14 @@ namespace BlackJack.Engine
         Deck deck = new Deck();
         public List<Card> dealerCards = new List<Card>();
         public List<Card> playerCards = new List<Card>();
+        public int PlayerChips { get; private set; }
+        public int CurrentBet { get; private set; }
+
         public BjEngine()
         {
+            PlayerChips = 1000;
             deck.Innit();
-            deck.Shuffle(); //NO
+            deck.Shuffle(); 
         }
 
         public List<Card> getDealerCard()
@@ -85,5 +89,66 @@ namespace BlackJack.Engine
             DealToDealer();
             DealToPlayer();
         }
+
+        public void DealerPlay()
+        {
+            while (GetDealerScore() < 17)
+            {
+                DealToDealer();
+            }
+        }
+        public void Stand()
+        {
+            DealerPlay();
+        }
+
+        public void IncreaseBet()
+        {
+            CurrentBet += 10;
+            PlayerChips -= 10;
+        }
+
+        public void DecreaseBet()
+        {
+            if (CurrentBet > 0)
+            {
+                CurrentBet -= 10;
+                PlayerChips += 10;
+            }
+        }
+
+        public void PlayerWin()
+        {
+            PlayerChips += CurrentBet * 2;
+            CurrentBet = 0;
+        }
+
+        public void Playerlose()
+        {
+            PlayerChips -= CurrentBet;
+            CurrentBet = 0;
+        }
+
+        public void PlaceBet(int bet)
+        {
+            if (bet > PlayerChips)
+            {
+                throw new InvalidOperationException("Bet exceeds player's available chips.");
+            }
+            PlayerChips -= bet;
+            CurrentBet = bet;
+        }
+
+        public void NewGame()
+        {
+            ResetPlayerScore();
+            ResetDealerScore();
+            PlayerChips = 1000;
+            CurrentBet = 0;
+            deck.Shuffle();
+            Start();
+        }
     }
 }
+    
+
