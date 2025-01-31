@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="BlackJack" Height="600" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="D:\\C#\\BlackJackC\\Image\\BackGround\\green.png"/>
+        <ImageBrush ImageSource="C:\\School\\C#\\BlackJack\\BlackJack\\Image\\BackGround\\green.png"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,6 +30,7 @@
         <WrapPanel Name="RestartButton" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Name="Restart" Content="New Round" Width="100" Height="40"
                 Click="RestartButton_Click"/>
+            <Button Name="NewGameButton" Content="New Game" Width="100" Height="40" Click="NewGameButton_Click"/>
         </WrapPanel>
         <WrapPanel Name="PlayerPanel" Grid.Column="0" Grid.Row="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"></WrapPanel>
@@ -53,8 +54,5 @@
             <Button Name ="BetButton" Content="Bet" Width="100" Height="40" Margin="10,10,0,0" Click="BetButton_Click"/>
         </StackPanel>
 
-        <WrapPanel Name="NewGameButtonPanel" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
-            <Button Name="NewGameButton" Content="New Game" Width="100" Height="40" Click="NewGameButton_Click"/>
-        </WrapPanel>
     </Grid>
 </Window>

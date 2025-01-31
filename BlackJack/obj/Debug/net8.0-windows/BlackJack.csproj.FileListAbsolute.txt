@@ -39,3 +39,4 @@ D:\C#\BlackJackC\BlackJack\obj\Debug\net8.0-windows\refint\BlackJack.dll
 D:\C#\BlackJackC\BlackJack\obj\Debug\net8.0-windows\BlackJack.pdb
 D:\C#\BlackJackC\BlackJack\obj\Debug\net8.0-windows\BlackJack.genruntimeconfig.cache
 D:\C#\BlackJackC\BlackJack\obj\Debug\net8.0-windows\ref\BlackJack.dll
+C:\School\C#\BlackJack\BlackJack\obj\Debug\net8.0-windows\BlackJack.sourcelink.json

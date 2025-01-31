@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BlackJack.Engine
 {
@@ -14,6 +15,7 @@ namespace BlackJack.Engine
         public int PlayerChips { get; private set; }
         public int CurrentBet { get; private set; }
 
+        public int LastBet { get; private set; }
         public BjEngine()
         {
             PlayerChips = 1000;
@@ -96,16 +98,36 @@ namespace BlackJack.Engine
             {
                 DealToDealer();
             }
+            if (GetDealerScore() > 21)
+            {
+                MessageBox.Show("Dealer Busted");
+                PlayerWin();
+            }
+
         }
         public void Stand()
         {
             DealerPlay();
+            if (GetDealerScore() > 21 || GetPlayerScore() > GetDealerScore())
+            {
+                MessageBox.Show("Player Wins");
+                PlayerWin();
+            }
+            else if (GetPlayerScore() == GetDealerScore())
+            {
+                MessageBox.Show("Push");
+                CurrentBet = 0;
+            }
+            else
+            {
+                MessageBox.Show("Dealer Wins");
+                Playerlose();
+            }
         }
 
         public void IncreaseBet()
         {
             CurrentBet += 10;
-            PlayerChips -= 10;
         }
 
         public void DecreaseBet()
@@ -113,19 +135,17 @@ namespace BlackJack.Engine
             if (CurrentBet > 0)
             {
                 CurrentBet -= 10;
-                PlayerChips += 10;
             }
         }
 
         public void PlayerWin()
         {
-            PlayerChips += CurrentBet * 2;
+            PlayerChips += LastBet * 2;
             CurrentBet = 0;
         }
 
         public void Playerlose()
         {
-            PlayerChips -= CurrentBet;
             CurrentBet = 0;
         }
 
@@ -137,6 +157,7 @@ namespace BlackJack.Engine
             }
             PlayerChips -= bet;
             CurrentBet = bet;
+            LastBet = bet;
         }
 
         public void NewGame()
@@ -144,6 +165,14 @@ namespace BlackJack.Engine
             ResetPlayerScore();
             ResetDealerScore();
             PlayerChips = 1000;
+            CurrentBet = 0;
+            deck.Shuffle();
+            Start();
+        }
+        public void Restart() 
+        {
+            ResetPlayerScore();
+            ResetDealerScore();
             CurrentBet = 0;
             deck.Shuffle();
             Start();
