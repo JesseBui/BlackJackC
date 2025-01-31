@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Media;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,6 +29,12 @@ namespace BlackJack
             RefreshCardsOnScreen();
             UpdateChipsDisplay();
         }
+        private void PlayEffect()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = "C:\\School\\C#\\Sound\\hit.wav";
+        }
+
         public void RefreshCardsOnScreen()
         {
             DealerPanel.Children.Clear();
@@ -55,7 +62,6 @@ namespace BlackJack
 
         public void NewGame()
         {
-
             engine.NewGame();
             DealerPanel.Children.Clear();
             PlayerPanel.Children.Clear();
@@ -74,6 +80,7 @@ namespace BlackJack
 
         private void HitButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             bool result = engine.Hit();
             if (!result)
             {
@@ -87,6 +94,7 @@ namespace BlackJack
 
         private void StandButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             engine.Stand();
             RefreshCardsOnScreen();
             UpdateChipsDisplay();
@@ -108,6 +116,7 @@ namespace BlackJack
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             NewRound();
         }
         private void UpdateChipsDisplay()
@@ -117,17 +126,20 @@ namespace BlackJack
         }
         private void IncreaseBetButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             engine.IncreaseBet();
             UpdateChipsDisplay();
         }
 
         private void DecreaseBetButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             engine.DecreaseBet();
             UpdateChipsDisplay();
         }
         private void BetButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             if (engine.CurrentBet > engine.PlayerChips)
             {
                 MessageBox.Show("Bet exceeds player's available chips.");
@@ -147,6 +159,7 @@ namespace BlackJack
 
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
+            PlayEffect();
             NewGame();
         }
 
