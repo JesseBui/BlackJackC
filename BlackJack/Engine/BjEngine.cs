@@ -87,6 +87,7 @@ namespace BlackJack.Engine
         public void Start()
         {
             DealToDealer();
+            dealerCards[0].FaceUp = true;
             DealToPlayer();
             DealToDealer();
             DealToPlayer();
@@ -142,11 +143,13 @@ namespace BlackJack.Engine
         {
             PlayerChips += LastBet * 2;
             CurrentBet = 0;
+            dealerCards[0].FaceUp = false;
         }
 
         public void Playerlose()
         {
             CurrentBet = 0;
+            dealerCards[0].FaceUp = false;
         }
 
         public void PlaceBet(int bet)

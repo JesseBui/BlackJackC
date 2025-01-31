@@ -92,6 +92,8 @@ namespace BlackJack
             UpdateChipsDisplay();
             HitButton.IsEnabled = false;
             StandButton.IsEnabled = false;
+            NewGameButton.IsEnabled = true;
+            RestartButton.IsEnabled = true;
             if (engine.GetPlayerScore() > engine.GetDealerScore())
             {
                 engine.PlayerWin();

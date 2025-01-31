@@ -10,7 +10,7 @@ namespace BlackJack.Engine
     {
         public String Suit;
         public int Rank;
-
+        public bool FaceUp { get; set; }
         public Card(String Suit, int Rank)
         {
             this.Suit = Suit;
@@ -21,33 +21,43 @@ namespace BlackJack.Engine
             if (this.Rank > 10)
             {
                 return 10;
+            } else if (this.Rank == 1)
+            {
+                return 11;
             }
             return this.Rank;
         }
 
         public String GetImageFileName()
         {
-            if (Rank == 1)
+            if (this.FaceUp == false)
             {
-                return  "ace_of_" + Suit + ".png";
-            }
+                if (Rank == 1)
+                {
+                    return "ace_of_" + Suit + ".png";
+                }
 
-            if (Rank == 11)
+                if (Rank == 11)
+                {
+                    return "jack_of_" + Suit + ".png";
+                }
+
+                if (Rank == 12)
+                {
+                    return "queen_of_" + Suit + ".png";
+                }
+
+                if (Rank == 13)
+                {
+                    return "king_of_" + Suit + ".png";
+                }
+
+                return Rank + "_of_" + Suit + ".png";
+            }
+            else
             {
-                return "jack_of_" + Suit + ".png";
+                return "back.png";
             }
-
-            if (Rank == 12)
-            {
-                return "queen_of_" + Suit + ".png";
-            }
-
-            if (Rank == 13)
-            {
-                return "king_of_" + Suit + ".png";
-            }
-
-            return Rank +"_of_" + Suit + ".png";
         }
     }
 }
