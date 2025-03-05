@@ -1,1 +1,1 @@
-Black Jack game that i did on WPF c#
+BlackJack game featuring ground breaking mechanic using C# WPF
