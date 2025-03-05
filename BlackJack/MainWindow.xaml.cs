@@ -16,6 +16,7 @@ namespace BlackJack
     {
         BjEngine engine;
         String path = "C:\\School\\C#\\BlackJack\\BlackJack\\Image\\PNG-cards-1.3\\";
+        MediaPlayer backgroundPlayer;
 
         public MainWindow()
         {
@@ -28,11 +29,23 @@ namespace BlackJack
             RestartButton.IsEnabled = false;
             RefreshCardsOnScreen();
             UpdateChipsDisplay();
+            BackgroundMusic();
         }
         private void PlayEffect()
         {
             SoundPlayer player = new SoundPlayer();
-            player.SoundLocation = "C:\\School\\C#\\Sound\\hit.wav";
+            player.SoundLocation = "C:\\School\\C#\\BlackJack\\Sound\\hit.wav";
+            player.Load();
+            player.Play();
+        }
+        
+
+        private void BackgroundMusic()
+        {
+            backgroundPlayer = new MediaPlayer();
+            backgroundPlayer.Open(new Uri("C:\\School\\C#\\BlackJack\\Sound\\Background.wav"));
+            backgroundPlayer.MediaEnded += (sender, e) => backgroundPlayer.Position = TimeSpan.Zero; // Loop the background music
+            backgroundPlayer.Play();
         }
 
         public void RefreshCardsOnScreen()
@@ -50,6 +63,7 @@ namespace BlackJack
         }
         public void NewRound()
         {
+
             engine.Restart();
             DealerPanel.Children.Clear();
             PlayerPanel.Children.Clear();
@@ -88,6 +102,8 @@ namespace BlackJack
                 HitButton.IsEnabled = false;
                 StandButton.IsEnabled = false;
                 engine.Playerlose();
+                NewGameButton.IsEnabled = true;
+                RestartButton.IsEnabled = true;
             }
             RefreshCardsOnScreen();
         }
@@ -143,6 +159,10 @@ namespace BlackJack
             if (engine.CurrentBet > engine.PlayerChips)
             {
                 MessageBox.Show("Bet exceeds player's available chips.");
+            }
+            if (engine.CurrentBet == 0)
+            {
+                MessageBox.Show("Please place a bet.");
             }
             else
             {

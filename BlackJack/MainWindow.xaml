@@ -10,12 +10,12 @@
         <ImageBrush ImageSource="C:\\School\\C#\\BlackJack\\BlackJack\\Image\\BackGround\\green.png"/>
     </Window.Background>
     <Window.Resources>
-        <Style TargetType="Button">
+        <Style x:Key="GreenButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="Aquamarine"/>
-            <Setter Property="BorderBrush" Value="DarkCyan"/>
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="10"/>
@@ -35,12 +35,92 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="MediumAquamarine"/>
-                    <Setter Property="BorderBrush" Value="DarkCyan"/>
+                    <Setter Property="Background" Value="DarkGreen"/>
+                    <Setter Property="BorderBrush" Value="Green"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="LightSeaGreen"/>
-                    <Setter Property="BorderBrush" Value="DarkCyan"/>
+                    <Setter Property="Background" Value="ForestGreen"/>
+                    <Setter Property="BorderBrush" Value="DarkGreen"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Gray"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RedButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="BorderBrush" Value="DarkRed"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkRed"/>
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Firebrick"/>
+                    <Setter Property="BorderBrush" Value="DarkRed"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Gray"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="YellowButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="BorderBrush" Value="Goldenrod"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Goldenrod"/>
+                    <Setter Property="BorderBrush" Value="Yellow"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Gold"/>
+                    <Setter Property="BorderBrush" Value="Goldenrod"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Background" Value="LightGray"/>
@@ -64,9 +144,9 @@
         <WrapPanel Name="DealerPanel" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"></WrapPanel>
         <WrapPanel Name="ButtonPanel" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
             <Button Name="HitButton" Content="Hit" Width="100" Height="40" Margin="10"
-                    Click="HitButton_Click"/>
+                    Click="HitButton_Click" Style="{StaticResource GreenButtonStyle}"/>
             <Button Name="StandButton" Content="Stand" Width="100" Height="40" Margin="10"
-                    Click="StandButton_Click"/>
+                    Click="StandButton_Click" Style="{StaticResource RedButtonStyle}"/>
         </WrapPanel>
         <WrapPanel Name="RestartButton" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Name="Restart" Content="New Round" Width="100" Height="40"
@@ -76,12 +156,14 @@
         <WrapPanel Name="PlayerPanel" Grid.Column="0" Grid.Row="2"
                    HorizontalAlignment="Center" VerticalAlignment="Center"></WrapPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0" Width="150">
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBlock Text="Chips: $" FontWeight="Bold" Margin="0,0,5,0" FontSize="16"/>
-                <TextBlock x:Name="PlayerChipsText" Margin="0" FontSize="16"/>
+        <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Chips: $" FontWeight="Bold" Margin="0,0,5,0" FontSize="16"/>
+                    <TextBlock x:Name="PlayerChipsText" Margin="0" FontSize="16"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Border>
 
         <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50,0,0,10" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
@@ -92,7 +174,7 @@
                 <Button Name="DecreaseButton" Content="-" Width="20" Height="20" Click="DecreaseBetButton_Click"/>
                 <Button Name="IncreaseButton" Content="+" Width="20" Height="20" Click="IncreaseBetButton_Click" Margin="5,0,0,0"/>
             </StackPanel>
-            <Button Name="BetButton" Content="Bet" Width="100" Height="40" Margin="10,10,0,0" Click="BetButton_Click"/>
+            <Button Name="BetButton" Content="Bet" Width="100" Height="40" Margin="10,10,0,0" Click="BetButton_Click" Style="{StaticResource YellowButtonStyle}"/>
         </StackPanel>
 
     </Grid>

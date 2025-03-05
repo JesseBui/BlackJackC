@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,7 +21,15 @@ namespace BlackJack.Engine
         {
             PlayerChips = 1000;
             deck.Innit();
-            deck.Shuffle(); 
+            deck.Shuffle();
+        }
+
+        private void winEffect()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = "C:\\School\\C#\\BlackJack\\Sound\\win.wav";
+            player.Load();
+            player.Play();
         }
 
         public List<Card> getDealerCard()
@@ -141,6 +150,7 @@ namespace BlackJack.Engine
 
         public void PlayerWin()
         {
+            winEffect();
             PlayerChips += LastBet * 2;
             CurrentBet = 0;
             dealerCards[0].FaceUp = false;
@@ -172,7 +182,7 @@ namespace BlackJack.Engine
             deck.Shuffle();
             Start();
         }
-        public void Restart() 
+        public void Restart()
         {
             ResetPlayerScore();
             ResetDealerScore();
@@ -182,5 +192,4 @@ namespace BlackJack.Engine
         }
     }
 }
-    
 
